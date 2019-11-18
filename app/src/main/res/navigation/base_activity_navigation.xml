@@ -6,7 +6,7 @@
     app:startDestination="@id/chatFragment">
     <fragment
         android:id="@+id/chatFragment"
-        android:name="testing.task.local.govorilka.ui.fragments.ChatFragment"
+        android:name="lacredin.messenger.govorilka.ui.fragments.ChatFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" />
 </navigation>
