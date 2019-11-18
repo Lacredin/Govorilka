@@ -27,7 +27,7 @@ interface GovorilkaDao {
 
     @Transaction
     @Query("SELECT * FROM MessageEntity WHERE MessageEntity.id == :idChat")
-    fun getMessege(idChat: String): List<MessageEntity>
+    fun getMessage(idChat: String): List<MessageEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertChat(chat: ChatEntity): Completable

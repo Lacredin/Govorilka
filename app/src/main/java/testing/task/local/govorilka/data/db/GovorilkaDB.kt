@@ -17,7 +17,7 @@ import testing.task.local.govorilka.data.models.chats.UsersChatsEntity
     UsersChatsEntity::class,
     MessageEntity::class
 ])
-public abstract class GovorilkaDB : RoomDatabase() {
+abstract class  GovorilkaDB : RoomDatabase() {
 
     abstract fun govorilkaDao(): GovorilkaDao
 
@@ -28,20 +28,18 @@ public abstract class GovorilkaDB : RoomDatabase() {
         private var INSTANCE: GovorilkaDB? = null
 
         fun getDatabase(context: Context): GovorilkaDB {
-            val tempInstance = INSTANCE
-            if (tempInstance != null) {
-                return tempInstance
-            }
-            synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    GovorilkaDB::class.java,
-                    "word_database"
-                )
-                    .fallbackToDestructiveMigration()
-                    .build()
-                INSTANCE = instance
-                return instance
+            return INSTANCE ?: let {
+                synchronized(this) {
+                    val instance = Room.databaseBuilder(
+                        context.applicationContext,
+                        GovorilkaDB::class.java,
+                        "govorilka_db"
+                    )
+                        .fallbackToDestructiveMigration()
+                        .build()
+                    INSTANCE = instance
+                    return instance
+                }
             }
         }
     }
